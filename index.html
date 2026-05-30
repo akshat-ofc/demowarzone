@@ -1,0 +1,2572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BGMI Warzone Cup 2025 — Dominate The Warzone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0D0D0D;
+  --surface1: #141414;
+  --surface2: #1A1A1A;
+  --surface3: #1E1E1E;
+  --gold:     #C9A84C;
+  --gold-dim: rgba(201,168,76,0.18);
+  --gold-30:  rgba(201,168,76,0.30);
+  --gold-40:  rgba(201,168,76,0.40);
+  --gold-50:  rgba(201,168,76,0.50);
+  --text-primary:   #F0EDE8;
+  --text-secondary: #8A8680;
+  --text-muted:     #5A5652;
+  --border:   rgba(255,255,255,0.07);
+  --border-12: rgba(255,255,255,0.12);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--black);
+  color: var(--text-primary);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY UTILITIES
+───────────────────────────────────────── */
+.display {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 18px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   ANGULAR BUTTON
+───────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #0D0D0D;
+}
+.btn-gold:hover {
+  background: #d9b85c;
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-12);
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+}
+.btn-ghost:hover {
+  border-color: var(--gold-50);
+  color: var(--text-primary);
+}
+
+.btn-full {
+  width: 100%;
+  justify-content: center;
+  padding: 17px 32px;
+  font-size: 15px;
+}
+
+/* ─────────────────────────────────────────
+   ANIMATIONS
+───────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+@keyframes scaleX-in {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.anim-1 { animation: fadeUp 0.55s ease both; animation-delay: 0.05s; }
+.anim-2 { animation: fadeUp 0.55s ease both; animation-delay: 0.18s; }
+.anim-3 { animation: fadeUp 0.55s ease both; animation-delay: 0.30s; }
+.anim-4 { animation: fadeUp 0.55s ease both; animation-delay: 0.42s; }
+.anim-5 { animation: fadeUp 0.55s ease both; animation-delay: 0.54s; }
+.anim-6 { animation: fadeUp 0.55s ease both; animation-delay: 0.66s; }
+
+/* ─────────────────────────────────────────
+   NAVBAR
+───────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: rgba(13,13,13,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 1000;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-hex {
+  width: 32px;
+  height: 32px;
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-hex span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 11px;
+  color: #0D0D0D;
+  letter-spacing: 0.05em;
+}
+
+.nav-wordmark {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.nav-wordmark small {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--text-primary); }
+
+.nav-cta {
+  padding: 9px 20px;
+  font-size: 12px;
+}
+
+.nav-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   AUDIO TOGGLE BUTTON
+───────────────────────────────────────── */
+.audio-toggle {
+  position: absolute;
+  bottom: 90px;
+  right: 40px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  background: rgba(13,13,13,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-primary);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.audio-toggle:hover {
+  background: rgba(201,168,76,0.15);
+  border-color: var(--gold-50);
+}
+.audio-toggle.playing {
+  border-color: var(--gold-40);
+  background: rgba(201,168,76,0.12);
+}
+
+/* ─────────────────────────────────────────
+   HERO
+───────────────────────────────────────── */
+.hero {
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 100px 40px 0;
+}
+
+/* Fullscreen background video */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Dark overlay so text stays readable */
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.58);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Grid lines on top of video */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Warm gold tint */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(ellipse 60% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 16px;
+  background: rgba(201,168,76,0.1);
+  border: 1px solid var(--gold-30);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.hero-badge .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+
+.hero-title {
+  font-size: clamp(62px, 9vw, 110px);
+}
+.hero-title .line-gold { color: var(--gold); display: block; }
+.hero-title .line-white { display: block; }
+
+.hero-sub {
+  max-width: 480px;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-top: 24px;
+  line-height: 1.7;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 0;
+  margin-top: 44px;
+  border: 1px solid var(--border);
+  max-width: 520px;
+}
+.hero-meta-item {
+  flex: 1;
+  padding: 18px 24px;
+  border-right: 1px solid var(--border);
+}
+.hero-meta-item:last-child { border-right: none; }
+.hero-meta-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 5px;
+}
+.hero-meta-value {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--text-primary);
+  letter-spacing: 0.03em;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+
+/* ─────────────────────────────────────────
+   COUNTDOWN BAR
+───────────────────────────────────────── */
+.countdown-bar {
+  position: relative;
+  z-index: 3;
+  background: var(--surface1);
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+  padding: 22px 40px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.countdown-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.countdown-units {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdown-unit {
+  text-align: center;
+  min-width: 56px;
+}
+
+.countdown-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  color: var(--text-primary);
+  line-height: 1;
+  display: block;
+}
+
+.countdown-lbl {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 3px;
+}
+
+.countdown-sep {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--text-muted);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+/* ─────────────────────────────────────────
+   SECTION WRAPPER
+───────────────────────────────────────── */
+.section {
+  padding: 96px 40px;
+}
+.section-alt { background: var(--surface1); }
+
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header { margin-bottom: 56px; }
+
+.section-title {
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--text-primary);
+}
+
+/* ─────────────────────────────────────────
+   ABOUT / STATS
+───────────────────────────────────────── */
+.about-intro {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.8;
+  margin-bottom: 60px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+}
+
+.stat-cell {
+  padding: 40px 36px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.stat-cell:last-child { border-right: none; }
+
+.stat-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.stat-cell:hover::before { transform: scaleX(1); }
+
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+  margin-bottom: 10px;
+}
+.stat-lbl {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ─────────────────────────────────────────
+   HOW IT WORKS
+───────────────────────────────────────── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--border);
+}
+
+.step-card {
+  padding: 44px 36px;
+  border-right: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.step-card:last-child { border-right: none; }
+
+.step-ghost {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 64px;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  display: block;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.step-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.step-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ─────────────────────────────────────────
+   PRIZE POOL
+───────────────────────────────────────── */
+.prizes-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: 0;
+  align-items: end;
+  border: 1px solid var(--border);
+}
+
+.prize-card {
+  padding: 44px 32px;
+  border-right: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+}
+.prize-card:last-child { border-right: none; }
+
+.prize-card-first {
+  background: rgba(201,168,76,0.04);
+  border-color: var(--gold-40) !important;
+  padding-top: 60px;
+}
+
+.prize-champion-badge {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  background: var(--gold);
+  color: #0D0D0D;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 16px;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  white-space: nowrap;
+}
+
+.prize-rank {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: block;
+}
+
+.prize-emoji {
+  font-size: 36px;
+  display: block;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.prize-amount {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  line-height: 1;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.prize-card-first .prize-amount { color: var(--gold); }
+.prize-card:not(.prize-card-first) .prize-amount { color: var(--text-primary); }
+
+.prize-extras {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ─────────────────────────────────────────
+   RULES
+───────────────────────────────────────── */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid var(--border);
+}
+
+.rule-card {
+  padding: 32px 36px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+.rule-card:nth-child(even) { border-right: none; }
+.rule-card:nth-last-child(1),
+.rule-card:nth-last-child(2) { border-bottom: none; }
+.rule-card:hover { background: var(--surface2); }
+
+.rule-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.rule-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.rule-desc {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ─────────────────────────────────────────
+   FAQ
+───────────────────────────────────────── */
+.faq-container {
+  border: 1px solid var(--border);
+  max-width: 840px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:last-child { border-bottom: none; }
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  gap: 20px;
+}
+.faq-question:hover { background: var(--surface2); }
+
+.faq-q-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.faq-icon {
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+  transition: transform 0.25s ease, color 0.25s ease;
+  line-height: 1;
+}
+.faq-item.open .faq-icon {
+  color: var(--gold);
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.faq-item.open .faq-answer { max-height: 200px; }
+
+.faq-answer-inner {
+  padding: 0 28px 22px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+.footer {
+  background: var(--surface1);
+  border-top: 1px solid var(--border);
+  padding: 64px 40px 32px;
+}
+
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-brand { }
+
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-style: italic;
+  max-width: 280px;
+}
+
+.footer-col-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+.footer-links a:hover { color: var(--text-primary); }
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-copy {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.footer-socials a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-socials a:hover { color: var(--gold); }
+
+/* ─────────────────────────────────────────
+   PAGE 2: REGISTRATION FORM
+───────────────────────────────────────── */
+.reg-header {
+  background: var(--surface1);
+  border-bottom: 1px solid var(--border);
+  padding: 80px 40px 44px;
+}
+
+.reg-header-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 28px;
+  transition: color 0.2s ease;
+}
+.back-btn:hover { color: var(--text-primary); }
+
+.reg-title {
+  font-size: clamp(40px, 5vw, 64px);
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.reg-subtitle {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+
+/* Form */
+.form-body {
+  padding: 56px 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-section {
+  margin-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 48px;
+}
+.form-section:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.section-num-badge {
+  width: 32px;
+  height: 32px;
+  background: var(--gold-dim);
+  border: 1px solid var(--gold-30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.form-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
+}
+
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-full { grid-column: 1 / -1; }
+
+.field-group { display: flex; flex-direction: column; gap: 6px; }
+
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.field-label .req { color: var(--gold); }
+
+.field-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+select,
+textarea {
+  background: var(--surface2);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 0;
+  color: var(--text-primary);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 14px;
+  width: 100%;
+  transition: border-color 0.2s ease;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold-50);
+}
+
+input::placeholder { color: var(--text-muted); }
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5652' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+select option { background: var(--surface2); color: var(--text-primary); }
+
+/* Player cards */
+.player-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.player-card {
+  background: var(--surface2);
+  border: 1px solid var(--border-12);
+}
+
+.player-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.player-card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.captain-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #0D0D0D;
+  background: var(--gold);
+  padding: 3px 10px;
+  clip-path: polygon(5px 0%, 100% 0%, calc(100% - 5px) 100%, 0% 100%);
+}
+
+.player-card-body {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* Terms box */
+.terms-scroll-box {
+  background: var(--surface2);
+  border: 1px solid var(--border-12);
+  padding: 18px 20px;
+  max-height: 120px;
+  overflow-y: auto;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 22px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) transparent;
+}
+
+.terms-scroll-box::-webkit-scrollbar { width: 4px; }
+.terms-scroll-box::-webkit-scrollbar-thumb { background: var(--text-muted); }
+
+.checkboxes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.checkbox-row input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  min-width: 16px;
+  accent-color: var(--gold);
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.checkbox-row a {
+  color: var(--gold);
+  text-decoration: none;
+  cursor: pointer;
+}
+.checkbox-row a:hover { text-decoration: underline; }
+
+/* ─────────────────────────────────────────
+   VALIDATION POPUP
+───────────────────────────────────────── */
+.val-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.val-overlay.show {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+.val-box {
+  background: var(--surface3);
+  border: 1px solid rgba(220,60,60,0.45);
+  padding: 36px 40px;
+  max-width: 420px;
+  width: 92%;
+  text-align: center;
+  animation: fadeUp 0.25s ease;
+}
+.val-icon { font-size: 40px; display: block; margin-bottom: 14px; line-height: 1; }
+.val-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  text-transform: uppercase;
+  color: #E05555;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+.val-msg {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 26px;
+}
+.val-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 28px;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid rgba(220,60,60,0.4);
+  background: transparent;
+  color: #E05555;
+  clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+  transition: all 0.2s ease;
+}
+.val-close:hover { background: rgba(220,60,60,0.1); }
+.field-error { border-color: rgba(220,60,60,0.6) !important; }
+
+/* Success Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.show {
+  display: flex;
+  animation: fadeIn 0.25s ease;
+}
+
+.modal-box {
+  background: var(--surface3);
+  border: 1px solid var(--gold-30);
+  padding: 48px 44px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  animation: fadeUp 0.3s ease;
+}
+
+.modal-icon { font-size: 48px; display: block; margin-bottom: 20px; }
+
+.modal-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+  line-height: 1;
+}
+
+.modal-text {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.squad-id-box {
+  background: var(--surface1);
+  border: 1px solid var(--border);
+  padding: 12px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--text-secondary);
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+/* ─────────────────────────────────────────
+   PAGE 3: TERMS & CONDITIONS
+───────────────────────────────────────── */
+.tnc-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+.tnc-section {
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+}
+.tnc-section:last-of-type { border-bottom: none; }
+
+.tnc-section-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.tnc-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.tnc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tnc-list li {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  padding-left: 18px;
+  position: relative;
+}
+
+.tnc-list li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.tnc-note-box {
+  background: rgba(201,168,76,0.05);
+  border-left: 2px solid var(--gold);
+  padding: 14px 18px;
+  margin-top: 16px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.tnc-back-row {
+  margin-top: 48px;
+  text-align: left;
+}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .navbar { padding: 0 20px; }
+  .nav-links { display: none; }
+
+  .hero { padding: 90px 20px 0; }
+  .hero-meta { max-width: 100%; flex-direction: column; }
+  .hero-meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .hero-meta-item:last-child { border-bottom: none; }
+  .hero-cta { flex-direction: column; }
+
+  .countdown-bar { padding: 20px; gap: 16px; flex-direction: column; align-items: flex-start; }
+
+  .section { padding: 64px 20px; }
+
+  .stats-grid,
+  .steps-grid,
+  .prizes-grid,
+  .rules-grid { grid-template-columns: 1fr; }
+
+  .stat-cell,
+  .step-card,
+  .prize-card,
+  .rule-card { border-right: none; }
+
+  .prize-card-first { padding-top: 72px; }
+
+  .footer-top { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+
+  .form-grid-3, .form-grid-2 { grid-template-columns: 1fr; }
+  .player-cards-grid { grid-template-columns: 1fr; }
+  .player-card-body { grid-template-columns: 1fr; }
+
+  .reg-header, .form-body, .tnc-body { padding-left: 20px; padding-right: 20px; }
+
+  .footer { padding: 48px 20px 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAVBAR (global, always visible)
+══════════════════════════════════════════ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo" onclick="showPage('landing')">
+    <img src="logo.png" alt="BGMI Warzone Cup Logo" class="nav-logo-img">
+    <div class="nav-hex"><span>BG</span></div>
+    <div class="nav-wordmark">
+      BGMI Warzone Cup
+      <small>Esports Tournament 2025</small>
+    </div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#about" onclick="navScrollTo('about')">About</a></li>
+    <li><a href="#prizes" onclick="navScrollTo('prizes')">Prizes</a></li>
+    <li><a href="#rules" onclick="navScrollTo('rules')">Rules</a></li>
+    <li><a href="#faq" onclick="navScrollTo('faq')">FAQ</a></li>
+  </ul>
+
+  <button class="btn btn-gold nav-cta" onclick="showPage('registration')">Register Now</button>
+</nav>
+
+
+<!-- ═══════════════════════════════════════
+     PAGE 1: LANDING PAGE
+══════════════════════════════════════════ -->
+<div class="page active" id="page-landing">
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <!-- Background video -->
+    <video class="hero-video" autoplay muted loop playsinline preload="auto" id="heroBgVideo">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay"></div>
+
+    <!-- Background audio -->
+    <audio id="heroBgAudio" loop preload="auto">
+      <source src="audio.mpeg" type="audio/mpeg">
+    </audio>
+
+    <!-- Audio toggle button -->
+    <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()" title="Toggle audio">
+      <span id="audioIcon">🔇</span>
+    </button>
+
+    <div class="hero-inner">
+      <div class="hero-badge anim-1">
+        <span class="dot"></span>
+        Registrations Open · BGMI Season 4
+      </div>
+
+      <h1 class="display hero-title anim-2">
+        <span class="line-white">Dominate the</span>
+        <span class="line-gold">Warzone</span>
+      </h1>
+
+      <p class="hero-sub anim-3">
+        India's premier squad-based BGMI tournament. Four players, one shot, and everything to prove. Show the nation what your squad is built for.
+      </p>
+
+      <div class="hero-meta anim-4">
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Prize Pool</span>
+          <span class="hero-meta-value">₹50,000</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Event Date</span>
+          <span class="hero-meta-value">Aug 15, 2025</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="hero-meta-label">Format</span>
+          <span class="hero-meta-value">Squad · TPP</span>
+        </div>
+      </div>
+
+      <div class="hero-cta anim-5">
+        <button class="btn btn-gold" onclick="showPage('registration')">Register Your Squad →</button>
+        <button class="btn btn-ghost" onclick="navScrollTo('rules')">View Rules</button>
+      </div>
+    </div>
+
+    <!-- Countdown Bar -->
+    <div class="countdown-bar anim-6">
+      <span class="countdown-label">Tournament Begins In</span>
+      <div class="countdown-units">
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-days">00</span>
+          <span class="countdown-lbl">Days</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-hours">00</span>
+          <span class="countdown-lbl">Hours</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-mins">00</span>
+          <span class="countdown-lbl">Mins</span>
+        </div>
+        <span class="countdown-sep">:</span>
+        <div class="countdown-unit">
+          <span class="countdown-num" id="cd-secs">00</span>
+          <span class="countdown-lbl">Secs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">About The Tournament</div>
+        <h2 class="display section-title">Forged For Champions</h2>
+      </div>
+      <p class="about-intro">
+        The BGMI Warzone Cup is not a casual bracket. It's a structured, professionally run esports event designed to surface India's most disciplined squads. Three match days, strict anti-cheat enforcement, and a prize pool worth fighting for — this is where real talent gets recognized.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <span class="stat-num">256+</span>
+          <span class="stat-lbl">Squads Competing</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">₹50K</span>
+          <span class="stat-lbl">Total Prize Pool</span>
+        </div>
+        <div class="stat-cell">
+          <span class="stat-num">3×</span>
+          <span class="stat-lbl">Match Days</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section section-alt" id="how">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Process</div>
+        <h2 class="display section-title">Three Steps To Battle</h2>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-ghost">01</span>
+          <div class="step-title">Register Your Squad</div>
+          <p class="step-desc">Fill in all four player details — real names, in-game names, UIDs, and ranks. Confirm your slot by paying the ₹200 entry fee via UPI. Incomplete forms will not be accepted.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-ghost">02</span>
+          <div class="step-title">Receive Confirmation</div>
+          <p class="step-desc">Your squad captain will receive a confirmation message with your unique Squad ID and match schedule. Room IDs for each match will be shared 30 minutes before start time.</p>
+        </div>
+        <div class="step-card">
+          <span class="step-ghost">03</span>
+          <div class="step-title">Compete &amp; Conquer</div>
+          <p class="step-desc">Play your assigned matches across three days. Standings are tracked in real time. The top 3 squads after the final round claim their prize. Only the best survive.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIZE POOL -->
+  <section class="section" id="prizes">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Rewards</div>
+        <h2 class="display section-title">What You're Fighting For</h2>
+      </div>
+
+      <div class="prizes-grid">
+        <!-- 2nd place -->
+        <div class="prize-card">
+          <span class="prize-rank">2nd Place</span>
+          <span class="prize-emoji">🥈</span>
+          <span class="prize-amount">₹15,000</span>
+          <p class="prize-extras">Runner-Up Certificate<br>Digital Trophy</p>
+        </div>
+
+        <!-- 1st place (center, taller) -->
+        <div class="prize-card prize-card-first">
+          <span class="prize-champion-badge">Champion</span>
+          <span class="prize-rank">1st Place</span>
+          <span class="prize-emoji">🏆</span>
+          <span class="prize-amount">₹25,000</span>
+          <p class="prize-extras">Champion Certificate<br>Physical Trophy<br>Featured on all socials</p>
+        </div>
+
+        <!-- 3rd place -->
+        <div class="prize-card">
+          <span class="prize-rank">3rd Place</span>
+          <span class="prize-emoji">🥉</span>
+          <span class="prize-amount">₹10,000</span>
+          <p class="prize-extras">3rd Place Certificate<br>Digital Trophy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section class="section section-alt" id="rules">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Regulations</div>
+        <h2 class="display section-title">Know The Rules</h2>
+      </div>
+
+      <div class="rules-grid">
+        <div class="rule-card">
+          <span class="rule-num">01</span>
+          <div class="rule-title">Squad of Four</div>
+          <p class="rule-desc">Every competing unit must consist of exactly four players. Solo registrations, trios, and duos will not be accepted under any circumstances.</p>
+        </div>
+        <div class="rule-card">
+          <span class="rule-num">02</span>
+          <div class="rule-title">Valid BGMI UID Required</div>
+          <p class="rule-desc">All four players must submit their correct 10-digit BGMI UID. UIDs are verified before match room access is granted. Invalid UIDs = disqualification.</p>
+        </div>
+        <div class="rule-card">
+          <span class="rule-num">03</span>
+          <div class="rule-title">No Emulators</div>
+          <p class="rule-desc">Participation is restricted to mobile devices only. Playing on emulators is strictly prohibited and will result in immediate disqualification of the entire squad.</p>
+        </div>
+        <div class="rule-card">
+          <span class="rule-num">04</span>
+          <div class="rule-title">Zero Tolerance Policy</div>
+          <p class="rule-desc">Hacks, aimbots, macros, wall-glitches, or any third-party software that provides unfair advantage are banned outright. Reports are reviewed and acted upon swiftly.</p>
+        </div>
+        <div class="rule-card">
+          <span class="rule-num">05</span>
+          <div class="rule-title">Match Punctuality</div>
+          <p class="rule-desc">All four players must join the room within five minutes of the room ID being shared. A grace period of 5 minutes is allowed; late arrivals will not be accommodated.</p>
+        </div>
+        <div class="rule-card">
+          <span class="rule-num">06</span>
+          <div class="rule-title">Entry Fee</div>
+          <p class="rule-desc">A non-refundable entry fee of ₹200 per squad is required to confirm the registration slot. Payment details will be provided after form submission.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">Support</div>
+        <h2 class="display section-title">Questions Answered</h2>
+      </div>
+
+      <div class="faq-container">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Can the same player be in two different squads?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">No. Each BGMI UID can only be registered once. Duplicate UID entries across different squads will result in both squads being disqualified without a refund.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What happens if one of our players goes absent on match day?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Player substitutions are not allowed once registration is closed. If a player is absent, the squad must play with remaining members or forfeit their match slot. No refunds will be issued for absent players.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Is there an age restriction or minimum rank to enter?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">All players must be at least 16 years of age and residents of India. A minimum in-game rank of Platinum is required at time of registration. Crown, Ace, and Conqueror players are encouraged to participate.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How and when are prizes distributed?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Prize money is transferred to the squad captain's UPI within 7 working days after the tournament concludes. TDS deductions apply for amounts exceeding ₹10,000 as per Indian tax regulations.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Can we make changes to our squad after registration?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Squad details can only be updated up to 72 hours before the first match day. After that window closes, all submitted details are considered final and no changes will be accepted.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How will we receive the match room IDs?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Room IDs are sent exclusively to the squad captain's registered phone number via WhatsApp, 30 minutes before each scheduled match. Make sure the phone number is active and reachable on match days.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo-row">
+            <div class="nav-hex"><span>BG</span></div>
+            <div class="nav-wordmark">
+              BGMI Warzone Cup
+              <small>Esports Tournament 2025</small>
+            </div>
+          </div>
+          <p class="footer-tagline">Made for champions. Not spectators.</p>
+        </div>
+
+        <div>
+          <span class="footer-col-title">Tournament</span>
+          <ul class="footer-links">
+            <li><a onclick="navScrollTo('about')">About</a></li>
+            <li><a onclick="navScrollTo('prizes')">Prize Pool</a></li>
+            <li><a onclick="navScrollTo('rules')">Rules</a></li>
+            <li><a onclick="navScrollTo('faq')">FAQ</a></li>
+            <li><a onclick="showPage('tnc')">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <span class="footer-col-title">Participate</span>
+          <ul class="footer-links">
+            <li><a onclick="showPage('registration')">Register Squad</a></li>
+            <li><a onclick="navScrollTo('how')">How It Works</a></li>
+            <li><a onclick="navScrollTo('about')">Eligibility</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 BGMI Warzone Cup. Not affiliated with Krafton Inc.</p>
+        <div class="footer-socials">
+          <a href="#">Instagram</a>
+          <a href="#">Discord</a>
+          <a href="#">YouTube</a>
+          <a href="#">Twitter/X</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- end page-landing -->
+
+
+<!-- ═══════════════════════════════════════
+     PAGE 2: REGISTRATION FORM
+══════════════════════════════════════════ -->
+<div class="page" id="page-registration">
+
+  <!-- Header -->
+  <div class="reg-header">
+    <div class="reg-header-inner">
+      <button class="back-btn" onclick="showPage('landing')">← Back to Home</button>
+      <h1 class="display reg-title">Squad Registration</h1>
+      <p class="reg-subtitle">Fill in all details carefully. Fields marked <span style="color:var(--gold)">*</span> are required.</p>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-body">
+    <form id="regForm" novalidate>
+
+      <!-- SECTION 01: Squad Information -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-num-badge">01</div>
+          <span class="form-section-title">Squad Information</span>
+        </div>
+        <div class="form-grid-3">
+          <div class="field-group">
+            <label class="field-label">Squad Name <span class="req">*</span></label>
+            <input type="text" placeholder="e.g. NoMercy Esports" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Server / Region <span class="req">*</span></label>
+            <select required>
+              <option value="" disabled selected>Select region</option>
+              <option>Asia Pacific</option>
+              <option>MENA</option>
+              <option>South Asia</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Tournament Mode <span class="req">*</span></label>
+            <select required>
+              <option value="" disabled selected>Select mode</option>
+              <option>Classic Erangel</option>
+              <option>Classic Miramar</option>
+              <option>TDM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 02: Player Details -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-num-badge">02</div>
+          <span class="form-section-title">Player Details</span>
+        </div>
+
+        <div class="player-cards-grid">
+
+          <!-- Player 1 -->
+          <div class="player-card">
+            <div class="player-card-header">
+              <span class="player-card-title">Player 1</span>
+              <span class="captain-badge">Squad Captain</span>
+            </div>
+            <div class="player-card-body">
+              <div class="field-group">
+                <label class="field-label">Full Real Name <span class="req">*</span></label>
+                <input type="text" placeholder="Enter full name" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">In-Game Name (IGN) <span class="req">*</span></label>
+                <input type="text" placeholder="Your BGMI username" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">BGMI UID <span class="req">*</span></label>
+                <input type="number" placeholder="10-digit numeric UID" data-uid="true" maxlength="10" required>
+                <span class="field-hint">10-digit numeric UID</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Phone Number <span class="req">*</span></label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" data-phone="true" required>
+                <span class="field-hint">Match room IDs sent here</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Rank <span class="req">*</span></label>
+                <select required>
+                  <option value="" disabled selected>Select rank</option>
+                  <option>Platinum</option>
+                  <option>Diamond</option>
+                  <option>Crown</option>
+                  <option>Ace</option>
+                  <option>Conqueror</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">State <span class="req">*</span></label>
+                <input type="text" placeholder="Your state" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player 2 -->
+          <div class="player-card">
+            <div class="player-card-header">
+              <span class="player-card-title">Player 2</span>
+            </div>
+            <div class="player-card-body">
+              <div class="field-group">
+                <label class="field-label">Full Real Name <span class="req">*</span></label>
+                <input type="text" placeholder="Enter full name" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">In-Game Name (IGN) <span class="req">*</span></label>
+                <input type="text" placeholder="Your BGMI username" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">BGMI UID <span class="req">*</span></label>
+                <input type="number" placeholder="10-digit numeric UID" data-uid="true" maxlength="10" required>
+                <span class="field-hint">10-digit numeric UID</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Phone Number <span class="req">*</span></label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" data-phone="true" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Rank <span class="req">*</span></label>
+                <select required>
+                  <option value="" disabled selected>Select rank</option>
+                  <option>Platinum</option>
+                  <option>Diamond</option>
+                  <option>Crown</option>
+                  <option>Ace</option>
+                  <option>Conqueror</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">State <span class="req">*</span></label>
+                <input type="text" placeholder="Your state" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player 3 -->
+          <div class="player-card">
+            <div class="player-card-header">
+              <span class="player-card-title">Player 3</span>
+            </div>
+            <div class="player-card-body">
+              <div class="field-group">
+                <label class="field-label">Full Real Name <span class="req">*</span></label>
+                <input type="text" placeholder="Enter full name" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">In-Game Name (IGN) <span class="req">*</span></label>
+                <input type="text" placeholder="Your BGMI username" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">BGMI UID <span class="req">*</span></label>
+                <input type="number" placeholder="10-digit numeric UID" data-uid="true" maxlength="10" required>
+                <span class="field-hint">10-digit numeric UID</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Phone Number <span class="req">*</span></label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" data-phone="true" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Rank <span class="req">*</span></label>
+                <select required>
+                  <option value="" disabled selected>Select rank</option>
+                  <option>Platinum</option>
+                  <option>Diamond</option>
+                  <option>Crown</option>
+                  <option>Ace</option>
+                  <option>Conqueror</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">State <span class="req">*</span></label>
+                <input type="text" placeholder="Your state" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Player 4 -->
+          <div class="player-card">
+            <div class="player-card-header">
+              <span class="player-card-title">Player 4</span>
+            </div>
+            <div class="player-card-body">
+              <div class="field-group">
+                <label class="field-label">Full Real Name <span class="req">*</span></label>
+                <input type="text" placeholder="Enter full name" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">In-Game Name (IGN) <span class="req">*</span></label>
+                <input type="text" placeholder="Your BGMI username" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">BGMI UID <span class="req">*</span></label>
+                <input type="number" placeholder="10-digit numeric UID" data-uid="true" maxlength="10" required>
+                <span class="field-hint">10-digit numeric UID</span>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Phone Number <span class="req">*</span></label>
+                <input type="tel" placeholder="+91 XXXXX XXXXX" data-phone="true" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Rank <span class="req">*</span></label>
+                <select required>
+                  <option value="" disabled selected>Select rank</option>
+                  <option>Platinum</option>
+                  <option>Diamond</option>
+                  <option>Crown</option>
+                  <option>Ace</option>
+                  <option>Conqueror</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">State <span class="req">*</span></label>
+                <input type="text" placeholder="Your state" required>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end player-cards-grid -->
+      </div>
+
+      <!-- SECTION 03: Additional Info -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-num-badge">03</div>
+          <span class="form-section-title">Additional Information</span>
+        </div>
+        <div class="form-grid-2" style="margin-bottom:16px;">
+          <div class="field-group">
+            <label class="field-label">Discord ID</label>
+            <input type="text" placeholder="e.g. username#1234">
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="field-group form-full">
+            <label class="field-label">How did you hear about us? <span class="req">*</span></label>
+            <select required>
+              <option value="" disabled selected>Select a source</option>
+              <option>Instagram</option>
+              <option>YouTube</option>
+              <option>Discord</option>
+              <option>Twitter/X</option>
+              <option>Friend Referral</option>
+              <option>WhatsApp Group</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 04: Agreement -->
+      <div class="form-section">
+        <div class="form-section-header">
+          <div class="section-num-badge">04</div>
+          <span class="form-section-title">Agreement &amp; Terms</span>
+        </div>
+
+        <div class="terms-scroll-box">
+          <p style="margin-bottom:12px;">By registering for the BGMI Warzone Cup 2025, your squad agrees to abide by all tournament rules, fair play policies, and code of conduct as outlined in the full Terms &amp; Conditions. All four players must be Indian residents aged 16 or above, holding a minimum rank of Platinum at time of registration.</p>
+          <p style="margin-bottom:12px;">Cheating, harassment, unsportsmanlike conduct, or use of unauthorized software will result in immediate disqualification without refund. Match room IDs are confidential and must not be shared outside the registered squad.</p>
+          <p>The ₹200 entry fee is non-refundable except in the event of tournament cancellation by the organizers. All prize distribution decisions made by the organizing team are final and binding. By submitting this form, you acknowledge reading and accepting the complete Terms &amp; Conditions.</p>
+        </div>
+
+        <div class="checkboxes-list">
+          <label class="checkbox-row">
+            <input type="checkbox" required>
+            I have read and agree to the <a onclick="showPage('tnc')">Terms &amp; Conditions</a>
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" required>
+            I confirm all four BGMI UIDs submitted are valid and active
+          </label>
+          <label class="checkbox-row">
+            <input type="checkbox" required>
+            I understand the ₹200 entry fee must be paid to confirm my squad's slot
+          </label>
+        </div>
+
+        <button type="button" class="btn btn-gold btn-full" onclick="handleSubmit()">Lock In Your Squad &#8594;</button>
+      </div>
+
+    </form>
+  </div>
+
+</div><!-- end page-registration -->
+
+
+<!-- ═══════════════════════════════════════
+     PAGE 3: TERMS & CONDITIONS
+══════════════════════════════════════════ -->
+<div class="page" id="page-tnc">
+
+  <!-- Header -->
+  <div class="reg-header">
+    <div class="reg-header-inner">
+      <button class="back-btn" onclick="showPage('landing')">← Back</button>
+      <h1 class="display reg-title">Terms &amp; Conditions</h1>
+      <p class="reg-subtitle">BGMI Warzone Cup 2025 · Last updated: July 1, 2025</p>
+    </div>
+  </div>
+
+  <div class="tnc-body">
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">01</div>
+        <span class="tnc-section-title">Eligibility Criteria</span>
+      </div>
+      <ul class="tnc-list">
+        <li>All participants must be a minimum of 16 years of age at the time of registration.</li>
+        <li>Participation is open to residents of India only. International players are not eligible.</li>
+        <li>Each player must hold a minimum BGMI in-game rank of Platinum at the time of squad registration.</li>
+        <li>Players currently serving a ban on any BGMI platform or previous esports event are ineligible.</li>
+        <li>Organizers reserve the right to verify rank and account details before granting tournament access.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">02</div>
+        <span class="tnc-section-title">Team Registration Rules</span>
+      </div>
+      <ul class="tnc-list">
+        <li>Each squad must consist of exactly four (4) players. Partial squads will not be accepted.</li>
+        <li>No player may be registered under more than one squad. Duplicate UIDs will result in disqualification of all involved squads.</li>
+        <li>All information submitted at registration is considered final once the form is submitted and entry fee is paid.</li>
+        <li>Changes to player details may only be requested up to 72 hours before the first match day, subject to organizer approval.</li>
+        <li>Entry fees are non-refundable once payment is confirmed, except in the case of organizer-initiated cancellation.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">03</div>
+        <span class="tnc-section-title">Fair Play Policy</span>
+      </div>
+      <ul class="tnc-list">
+        <li>The use of any form of hacking software, aimbots, wall hacks, speed hacks, or any client-side modification is strictly prohibited.</li>
+        <li>Emulator-based gameplay is not permitted. All players must compete on iOS or Android mobile devices.</li>
+        <li>Match-fixing, score manipulation, or any collusion between squads to influence results is a bannable offense.</li>
+        <li>Screenshots and screen recordings may be requested by organizers at any time to validate gameplay integrity.</li>
+      </ul>
+      <div class="tnc-note-box">
+        ⚠ Violation Consequence: Any squad found in breach of fair play rules will be immediately disqualified, permanently banned from future events, and their entry fee will be forfeited.
+      </div>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">04</div>
+        <span class="tnc-section-title">Match Conduct &amp; Scheduling</span>
+      </div>
+      <ul class="tnc-list">
+        <li>Room IDs will be shared to the squad captain's registered phone number via WhatsApp, 30 minutes before each scheduled match.</li>
+        <li>A 5-minute grace period is granted from the scheduled start time. Squads failing to join within this window forfeit their slot for that match.</li>
+        <li>All matches must be played in the scheduled mode and map as communicated by the organizers.</li>
+        <li>Intentional disconnections to avoid unfavorable outcomes will be treated as a forfeiture.</li>
+        <li>Technical issues on a player's end do not constitute grounds for a rematch.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">05</div>
+        <span class="tnc-section-title">Entry Fee &amp; Payments</span>
+      </div>
+      <ul class="tnc-list">
+        <li>The registration entry fee is ₹200 per squad, payable via UPI to details provided after form submission.</li>
+        <li>Entry fees are strictly non-refundable once payment is confirmed, regardless of the squad's performance in the tournament.</li>
+        <li>In the event of tournament cancellation by the organizers, full refunds will be processed within 10 working days.</li>
+        <li>Squads have 24 hours from form submission to complete payment. Unpaid slots will be released and made available to waitlisted squads.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">06</div>
+        <span class="tnc-section-title">Prize Distribution</span>
+      </div>
+      <ul class="tnc-list">
+        <li>Prize money will be transferred to the squad captain's UPI ID within 7 working days following the tournament's conclusion.</li>
+        <li>TDS (Tax Deducted at Source) will be applied to prize amounts exceeding ₹10,000 as mandated by Indian tax law.</li>
+        <li>In the event of a tie in final standings, the squad with the higher total kills across all matches will be ranked higher.</li>
+        <li>Prize certificates will be issued digitally to all winning squad members within 14 days of the tournament conclusion.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">07</div>
+        <span class="tnc-section-title">Code of Conduct</span>
+      </div>
+      <ul class="tnc-list">
+        <li>All players are expected to behave in a sportsmanlike and respectful manner towards opponents, organizers, and spectators at all times.</li>
+        <li>Hate speech, discriminatory language, harassment, or threats of any kind directed at any individual are strictly prohibited.</li>
+        <li>Disputes must be raised through official channels only. Publicly disputing results on social media prior to organizer review may result in penalties.</li>
+        <li>The squad captain is responsible for the conduct of all squad members throughout the tournament duration.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">08</div>
+        <span class="tnc-section-title">Organizer's Rights &amp; Modifications</span>
+      </div>
+      <ul class="tnc-list">
+        <li>The organizing team reserves the right to amend, suspend, or cancel the tournament at any time without prior notice.</li>
+        <li>All decisions made by the organizing team regarding rules enforcement, disqualifications, and prize distribution are final and binding.</li>
+        <li>Organizers may modify match schedules, formats, or maps at their discretion if required for operational reasons.</li>
+        <li>The organizers reserve the right to disqualify any squad deemed to be acting in a manner contrary to the spirit of the tournament.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">09</div>
+        <span class="tnc-section-title">Privacy Policy</span>
+      </div>
+      <ul class="tnc-list">
+        <li>Personal information collected during registration (names, UIDs, phone numbers) will be used solely for tournament administration purposes.</li>
+        <li>Squad names, IGNs, and match results may be published publicly on the organizer's social media channels and website.</li>
+        <li>Player data will not be sold or shared with third parties for commercial purposes.</li>
+        <li>By registering, participants consent to being featured in tournament-related social media posts and promotional materials.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-section">
+      <div class="tnc-section-header">
+        <div class="section-num-badge">10</div>
+        <span class="tnc-section-title">Disclaimer &amp; Liability</span>
+      </div>
+      <ul class="tnc-list">
+        <li>BGMI Warzone Cup is an independently organized community tournament and is not affiliated with, endorsed by, or sponsored by Krafton Inc.</li>
+        <li>The organizers shall not be held liable for any technical issues, connectivity failures, or device malfunctions experienced by participants during the tournament.</li>
+        <li>Participation in this tournament is entirely voluntary, and all participants do so at their own risk.</li>
+        <li>The organizers accept no liability for any direct or indirect losses arising from participation in or exclusion from this tournament.</li>
+      </ul>
+    </div>
+
+    <div class="tnc-back-row">
+      <button class="btn btn-gold" onclick="showPage('registration')">← Back to Registration</button>
+    </div>
+
+  </div>
+</div><!-- end page-tnc -->
+
+
+<!-- VALIDATION POPUP -->
+<div class="val-overlay" id="valPopup">
+  <div class="val-box">
+    <span class="val-icon" id="valIcon">⚠️</span>
+    <div class="val-title" id="valTitle">Hold On</div>
+    <p class="val-msg" id="valMsg">Please fill in all required fields.</p>
+    <button class="val-close" onclick="closeValPopup()">Got It</button>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box">
+    <span class="modal-icon">🎯</span>
+    <div class="modal-title">Squad Locked In</div>
+    <p class="modal-text">
+      Your squad registration has been received. A confirmation will be sent to your captain's phone within 24 hours. Payment details will follow shortly — ensure your slot is secured.
+    </p>
+    <div class="squad-id-box" id="squadIdDisplay">WCup-2025-0000</div>
+    <button class="btn btn-ghost" onclick="closeModal()" style="width:100%;justify-content:center;">Done</button>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ──────────────────────────────
+   PAGE SYSTEM
+────────────────────────────── */
+function showPage(id) {
+  var map = { landing: 'page-landing', registration: 'page-registration', tnc: 'page-tnc' };
+  var target = map[id] || 'page-landing';
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  var el = document.getElementById(target);
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function navScrollTo(sectionId) {
+  showPage('landing');
+  setTimeout(function() {
+    var el = document.getElementById(sectionId);
+    if (el) {
+      var top = el.getBoundingClientRect().top + window.pageYOffset - 70;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }, 60);
+}
+
+/* ──────────────────────────────
+   BACKGROUND AUDIO
+────────────────────────────── */
+var audioPlaying = false;
+
+function toggleAudio() {
+  var audio  = document.getElementById('heroBgAudio');
+  var icon   = document.getElementById('audioIcon');
+  var btn    = document.getElementById('audioToggle');
+  if (!audio) return;
+
+  if (audioPlaying) {
+    audio.pause();
+    icon.textContent = '🔇';
+    btn.classList.remove('playing');
+    audioPlaying = false;
+  } else {
+    audio.play().then(function() {
+      icon.textContent = '🔊';
+      btn.classList.add('playing');
+      audioPlaying = true;
+    }).catch(function() {
+      // autoplay blocked — user must click again
+      icon.textContent = '🔊';
+    });
+  }
+}
+
+// Try to play audio after first user interaction on the page
+document.addEventListener('click', function startAudioOnce() {
+  var audio = document.getElementById('heroBgAudio');
+  if (audio && !audioPlaying) {
+    audio.volume = 0.5;
+    audio.play().then(function() {
+      audioPlaying = true;
+      var icon = document.getElementById('audioIcon');
+      var btn  = document.getElementById('audioToggle');
+      if (icon) icon.textContent = '🔊';
+      if (btn)  btn.classList.add('playing');
+    }).catch(function() {});
+  }
+  document.removeEventListener('click', startAudioOnce);
+}, { once: true });
+
+/* ──────────────────────────────
+   COUNTDOWN TIMER
+────────────────────────────── */
+var eventDate = new Date('2025-08-15T10:00:00+05:30');
+
+function updateCountdown() {
+  var now  = new Date();
+  var diff = eventDate - now;
+  if (diff <= 0) {
+    document.getElementById('cd-days').textContent  = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-mins').textContent  = '00';
+    document.getElementById('cd-secs').textContent  = '00';
+    return;
+  }
+  var days  = Math.floor(diff / 86400000); diff -= days  * 86400000;
+  var hours = Math.floor(diff / 3600000);  diff -= hours * 3600000;
+  var mins  = Math.floor(diff / 60000);    diff -= mins  * 60000;
+  var secs  = Math.floor(diff / 1000);
+  document.getElementById('cd-days').textContent  = days  < 10 ? '0'+days  : ''+days;
+  document.getElementById('cd-hours').textContent = hours < 10 ? '0'+hours : ''+hours;
+  document.getElementById('cd-mins').textContent  = mins  < 10 ? '0'+mins  : ''+mins;
+  document.getElementById('cd-secs').textContent  = secs  < 10 ? '0'+secs  : ''+secs;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ──────────────────────────────
+   FAQ ACCORDION
+────────────────────────────── */
+function toggleFaq(questionEl) {
+  var item   = questionEl.parentElement;
+  var isOpen = item.classList.contains('open');
+  var all    = document.querySelectorAll('.faq-item.open');
+  for (var i = 0; i < all.length; i++) all[i].classList.remove('open');
+  if (!isOpen) item.classList.add('open');
+}
+
+/* ──────────────────────────────
+   VALIDATION POPUP
+────────────────────────────── */
+function showValPopup(icon, title, msg, focusEl) {
+  document.getElementById('valIcon').textContent  = icon;
+  document.getElementById('valTitle').textContent = title;
+  document.getElementById('valMsg').textContent   = msg;
+  document.getElementById('valPopup').classList.add('show');
+  if (focusEl) {
+    focusEl.classList.add('field-error');
+    setTimeout(function() {
+      focusEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 80);
+  }
+}
+
+function closeValPopup() {
+  document.getElementById('valPopup').classList.remove('show');
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.id === 'valPopup') closeValPopup();
+});
+
+document.addEventListener('focusin', function(e) {
+  if (e.target && e.target.classList.contains('field-error'))
+    e.target.classList.remove('field-error');
+});
+
+/* ──────────────────────────────
+   LIVE UID / PHONE GUARD
+────────────────────────────── */
+document.addEventListener('input', function(e) {
+  var el = e.target;
+  if (!el) return;
+
+  if (el.getAttribute('data-uid') === 'true') {
+    var d = el.value.replace(/[^0-9]/g, '');
+    if (d.length > 10) {
+      el.value = d.slice(0, 10);
+      showValPopup('🎮', 'UID Too Long',
+        'BGMI UID must be exactly 10 digits. Extra digits have been removed.', el);
+    }
+  }
+
+  if (el.getAttribute('data-phone') === 'true') {
+    var d2 = el.value.replace(/[^0-9]/g, '');
+    if (d2.length > 10) {
+      el.value = d2.slice(0, 10);
+      showValPopup('📵', 'Number Too Long',
+        'Phone number must not exceed 10 digits. Extra digits have been removed.', el);
+    }
+  }
+});
+
+/* ──────────────────────────────
+   FORM VALIDATION + SUBMIT
+────────────────────────────── */
+function getLabel(el) {
+  var fg = el.closest ? el.closest('.field-group') : null;
+  if (!fg) return 'this field';
+  var lbl = fg.querySelector('.field-label');
+  if (!lbl) return 'this field';
+  return lbl.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function handleSubmit() {
+  // Clear previous highlights
+  var errEls = document.querySelectorAll('.field-error');
+  for (var x = 0; x < errEls.length; x++) errEls[x].classList.remove('field-error');
+
+  var form = document.getElementById('regForm');
+  if (!form) { alert('Form not found'); return; }
+
+  // STEP 1 — required text / number / tel inputs
+  var textInputs = form.querySelectorAll('input[type="text"][required], input[type="number"][required], input[type="tel"][required]');
+  for (var i = 0; i < textInputs.length; i++) {
+    if (textInputs[i].value.trim() === '') {
+      showValPopup('⚠️', 'Field Required',
+        '"' + getLabel(textInputs[i]) + '" cannot be left empty. Please fill in all required fields.',
+        textInputs[i]);
+      return;
+    }
+  }
+
+  // STEP 2 — required selects
+  var selects = form.querySelectorAll('select[required]');
+  for (var s = 0; s < selects.length; s++) {
+    if (!selects[s].value) {
+      showValPopup('⚠️', 'Selection Required',
+        'Please choose an option for "' + getLabel(selects[s]) + '" before submitting.',
+        selects[s]);
+      return;
+    }
+  }
+
+  // STEP 3 — UID exactly 10 digits
+  var uidInputs = form.querySelectorAll('[data-uid="true"]');
+  for (var u = 0; u < uidInputs.length; u++) {
+    var uidVal = uidInputs[u].value.replace(/[^0-9]/g, '');
+    if (uidVal.length !== 10) {
+      showValPopup('🎮', 'Invalid BGMI UID',
+        'Player ' + (u + 1) + ' UID must be exactly 10 digits. You entered ' + uidVal.length + '.',
+        uidInputs[u]);
+      return;
+    }
+  }
+
+  // STEP 4 — phone exactly 10 digits
+  var phoneInputs = form.querySelectorAll('[data-phone="true"]');
+  for (var p = 0; p < phoneInputs.length; p++) {
+    var phVal = phoneInputs[p].value.replace(/[^0-9]/g, '');
+    if (phVal.length !== 10) {
+      showValPopup('📵', 'Invalid Phone Number',
+        'Player ' + (p + 1) + ' phone must be exactly 10 digits. You entered ' + phVal.length + '.',
+        phoneInputs[p]);
+      return;
+    }
+  }
+
+  // STEP 5 — all checkboxes ticked
+  var cbs = form.querySelectorAll('input[type="checkbox"]');
+  for (var c = 0; c < cbs.length; c++) {
+    if (!cbs[c].checked) {
+      showValPopup('📋', 'Agreement Required',
+        'Please tick all three agreement checkboxes at the bottom before submitting.',
+        cbs[c]);
+      return;
+    }
+  }
+
+  // ALL VALID
+  doSubmit(form);
+}
+
+function doSubmit(form) {
+  var FORMSPREE_URL = 'https://formspree.io/f/xykvvqvn';
+
+  var t = form.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"]');
+  var s = form.querySelectorAll('select');
+
+  var randId  = Math.floor(1000 + Math.random() * 8999);
+  var squadId = 'WCup-2025-' + randId;
+
+  var data = new FormData();
+  data.append('Squad ID',        squadId);
+  data.append('Timestamp',       new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }));
+  data.append('Squad Name',      t[0]  ? t[0].value  : '');
+  data.append('Region',          s[0]  ? s[0].value  : '');
+  data.append('Mode',            s[1]  ? s[1].value  : '');
+  data.append('P1 Name',         t[1]  ? t[1].value  : '');
+  data.append('P1 IGN',          t[2]  ? t[2].value  : '');
+  data.append('P1 UID',          t[3]  ? t[3].value  : '');
+  data.append('P1 Phone',        t[4]  ? t[4].value  : '');
+  data.append('P1 Rank',         s[2]  ? s[2].value  : '');
+  data.append('P1 State',        t[5]  ? t[5].value  : '');
+  data.append('P2 Name',         t[6]  ? t[6].value  : '');
+  data.append('P2 IGN',          t[7]  ? t[7].value  : '');
+  data.append('P2 UID',          t[8]  ? t[8].value  : '');
+  data.append('P2 Phone',        t[9]  ? t[9].value  : '');
+  data.append('P2 Rank',         s[3]  ? s[3].value  : '');
+  data.append('P2 State',        t[10] ? t[10].value : '');
+  data.append('P3 Name',         t[11] ? t[11].value : '');
+  data.append('P3 IGN',          t[12] ? t[12].value : '');
+  data.append('P3 UID',          t[13] ? t[13].value : '');
+  data.append('P3 Phone',        t[14] ? t[14].value : '');
+  data.append('P3 Rank',         s[4]  ? s[4].value  : '');
+  data.append('P3 State',        t[15] ? t[15].value : '');
+  data.append('P4 Name',         t[16] ? t[16].value : '');
+  data.append('P4 IGN',          t[17] ? t[17].value : '');
+  data.append('P4 UID',          t[18] ? t[18].value : '');
+  data.append('P4 Phone',        t[19] ? t[19].value : '');
+  data.append('P4 Rank',         s[5]  ? s[5].value  : '');
+  data.append('P4 State',        t[20] ? t[20].value : '');
+  data.append('Discord ID',      t[21] ? t[21].value : '');
+  data.append('Referral Source', s[6]  ? s[6].value  : '');
+
+  var btn = document.querySelector('#regForm .btn-gold');
+  var orig = btn ? btn.textContent : '';
+  if (btn) { btn.textContent = 'Submitting...'; btn.disabled = true; btn.style.opacity = '0.65'; }
+
+  fetch(FORMSPREE_URL, {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  })
+  .then(function(res) {
+    if (btn) { btn.textContent = orig; btn.disabled = false; btn.style.opacity = ''; }
+    if (res.ok) {
+      document.getElementById('squadIdDisplay').textContent = squadId;
+      document.getElementById('successModal').classList.add('show');
+    } else {
+      showValPopup('🔌', 'Submission Failed', 'Something went wrong. Please try again in a moment.');
+    }
+  })
+  .catch(function() {
+    if (btn) { btn.textContent = orig; btn.disabled = false; btn.style.opacity = ''; }
+    showValPopup('🔌', 'Network Error', 'Could not connect. Please check your internet and try again.');
+  });
+}
+
+/* ──────────────────────────────
+   SUCCESS MODAL
+────────────────────────────── */
+function closeModal() {
+  document.getElementById('successModal').classList.remove('show');
+  showPage('landing');
+}
+
+document.addEventListener('click', function(e) {
+  if (e.target && e.target.id === 'successModal') closeModal();
+});
+
+/* ──────────────────────────────
+   SMOOTH ANCHOR SCROLL
+────────────────────────────── */
+document.addEventListener('click', function(e) {
+  var a = e.target.closest('a[href^="#"]');
+  if (a) {
+    e.preventDefault();
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      var top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  }
+});
+
+</script>
+</body>
+</html>
